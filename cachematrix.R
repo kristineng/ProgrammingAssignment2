@@ -13,14 +13,14 @@ cacheMatrix <- function(matrix = matrix()) {
     getInverse <- function() inv  ## get the cached inverse matrix
     list(set = assignMatrix, get = retrieveMatrix, cacheInverse = cacheInverse, getInverse = getInverse)  ## Return a list of functions
 }
-solveMatrix <- function(matrixObj, ...) {
-    inv <- matrixObj$getInverse() 
+solveMatrix <- function(matrixObject, ...) {
+    inv <- matrixObject$getInverse() 
     if(!is.null(inv)) {
         message("cached result")
         return(inv)
     }
-    mat <- matrixObj$get()  ## get the matrix to be inverted
+    mat <- matrixObject$get()  ## get the matrix to be inverted
     inv <- solve(mat, ...) 
-    matrixObj$cacheInverse(inv) 
+    matrixObject$cacheInverse(inv) 
     inv 
 }
